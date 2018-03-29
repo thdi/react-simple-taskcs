@@ -7,12 +7,14 @@ var createReactClass = require('create-react-class');
 var Field = createReactClass({
     getInitialState: function () {
         return {
-            tasks: [
-                'Необходимо купить молоко',
-                'Надо почистить зубы',
-                'Просто отдохнуть'
-            ]
+            tasks: []
         }
+    },
+
+    add: function (text) {
+        var arr = this.state.tasks;
+        arr.push(text);
+        this.setState({tasks: arr});
     },
 
     deleteBlock: function (i) {
@@ -39,6 +41,7 @@ var Field = createReactClass({
     render: function() {
         return (
             <div className="field">
+                <button onClick={this.add.bind(null, 'Просто задание')} className="btn new">Новое задание</button>
                 {this.state.tasks.map(this.eachTask)}
             </div>
         );
